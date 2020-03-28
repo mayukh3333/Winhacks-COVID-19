@@ -4,4 +4,5 @@ export class User {
   facility: string;
   companyName: string;
   address: string;
+  type: string;
 }

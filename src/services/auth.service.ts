@@ -1,22 +1,49 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "src/models/user.model";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { FirestoreService } from "./firestore.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth) {}
+  constructor(
+    public auth: AngularFireAuth,
+    public jwtHelper: JwtHelperService,
+    public firestore: FirestoreService
+  ) {}
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem("token");
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   register(user: User, password: string) {
-    this.auth.createUserWithEmailAndPassword(user.email, password).then(res => {
-      console.log(res);
-    });
+    console.log("User Object", user);
+    return this.auth
+      .createUserWithEmailAndPassword(user.email, password)
+      .then(res => {
+        res.user.getIdToken().then(data => {
+          this.firestore.registerNewUser(res.user.uid, user, data);
+        });
+        return res;
+      })
+      .catch(error => {
+        return error;
+      });
   }
 
   signIn(user: User, password: string) {
-    this.auth.signInWithEmailAndPassword(user.email, password).then(res => {
-      console.log(res);
-    });
+    return this.auth
+      .signInWithEmailAndPassword(user.email, password)
+      .then(res => {
+        return res;
+      })
+      .catch(error => {
+        return error;
+      });
   }
 }

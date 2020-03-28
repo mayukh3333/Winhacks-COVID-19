@@ -3,6 +3,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "src/models/user.model";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { FirestoreService } from "./firestore.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,8 @@ export class AuthService {
   constructor(
     public auth: AngularFireAuth,
     public jwtHelper: JwtHelperService,
-    public firestore: FirestoreService
+    public firestore: FirestoreService,
+    public router: Router
   ) {}
 
   public isAuthenticated(): boolean {
@@ -40,6 +42,10 @@ export class AuthService {
     return this.auth
       .signInWithEmailAndPassword(user.email, password)
       .then(res => {
+        res.user.getIdToken().then(data => {
+          localStorage.setItem("token", data);
+          this.router.navigate(["dashboard"]);
+        });
         return res;
       })
       .catch(error => {

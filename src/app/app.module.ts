@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms";
 import { HomeComponent } from "./home/home.component";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { JwtModule } from "@auth0/angular-jwt";
+import { NgxMapboxGLModule } from "ngx-mapbox-gl";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -30,6 +31,10 @@ export function tokenGetter() {
         // whitelistedDomains: ["example.com"],
         // blacklistedRoutes: ["example.com/examplebadroute/"]
       }
+    }),
+    NgxMapboxGLModule.withConfig({
+      accessToken:
+        "pk.eyJ1IjoibWVuZG96YW5tYXJ0aW4iLCJhIjoiY2p3bm45enM5MHB3NjN5cDhyYjc3dDI3bCJ9.tZmq7oSfeni7-whG9aaajw" // Optional, can also be set per map (accessToken input of mgl-map)
     })
   ],
   providers: [JwtHelperService],

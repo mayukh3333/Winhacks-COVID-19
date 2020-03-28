@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/services/auth.service";
 import { User } from "src/models/user.model";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd, Event } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
+import { ScriptStoreService } from "src/services/script-store.service";
 declare var $: any;
 
 @Component({
@@ -25,15 +27,46 @@ export class LoginComponent implements OnInit {
       message: "Please ensure that you have typed both passwords correctly"
     }
   ];
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private dynamicScriptLoader: ScriptStoreService,
+    private router: Router
+  ) {
     this.user = new User();
     this.user.type = "receiver";
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.loadScripts();
+      }
+    });
+  }
 
+  private loadScripts() {
+    this.dynamicScriptLoader
+      .load("appjs")
+      .then(data => {
+        console.log(data);
+        console.log("Scripts loaded succesfully");
+      })
+      .catch(error => console.log(error));
+  }
   public signIn() {
-    this.auth.signIn(this.user, this.password);
+    if (this.user.email === undefined) {
+      this.errorTitle = this.error[0].title;
+      this.errorMessage = this.error[0].message;
+      $("#modal").modal();
+    } else {
+      this.auth.signIn(this.user, this.password).then(data => {
+        if (data.code) {
+          this.errorTitle = "Error";
+          this.errorMessage = data.message;
+          $("#modal").modal();
+        }
+      });
+    }
   }
 
   public register() {

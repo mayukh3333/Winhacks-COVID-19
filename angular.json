@@ -19,7 +19,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/assets/css/vendor.css",
               "src/assets/css/style.css",
@@ -27,7 +30,10 @@
               "./node_modules/mapbox-gl/dist/mapbox-gl.css",
               "./node_modules/@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css"
             ],
-            "scripts": ["src/assets/js/vendor.js", "src/assets/js/app.js"]
+            "scripts": [
+              "src/assets/js/vendor.js",
+              "src/assets/js/app.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -84,8 +90,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": []
           }
         },
@@ -97,7 +108,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -119,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "WinhacksCOVID19"
+  "defaultProject": "WinhacksCOVID19",
+  "cli": {
+    "analytics": "2500105b-9826-4a97-aeda-80ab4af44f18"
+  }
 }

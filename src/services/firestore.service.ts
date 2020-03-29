@@ -38,7 +38,7 @@ export class FirestoreService {
       type: "Feature",
       geometry: {
         type: "Point",
-        coordinates: [latitude, longitude]
+        coordinates: [longitude, latitude]
       },
       properties: {
         firstName: formValues.firstName,
@@ -54,12 +54,7 @@ export class FirestoreService {
     };
     this.requestsCollection.add(JSON.parse(JSON.stringify(data)));
   }
-  async getRequestedSupplies() {
-    return this.firestore
-      .collection("Requests")
-      .snapshotChanges()
-      .subscribe(res => {
-        return res;
-      });
+  getRequestedSupplies() {
+    return this.firestore.collection("Requests").snapshotChanges();
   }
 }

@@ -10,7 +10,7 @@ import { FirestoreService } from "src/services/firestore.service";
 })
 export class HomeComponent implements OnInit {
   @ViewChild("map") map: Map;
-
+  features: Array<any>;
   constructor(private firestore: FirestoreService) {}
 
   ngOnInit(): void {
@@ -34,8 +34,31 @@ export class HomeComponent implements OnInit {
         .setHTML("<b>DBH:</b> " + e.features[0].properties.dbh)
         .addTo(map);
     });
-    const geoJson = this.firestore.getRequestedSupplies();
-    console.log("geoJson", geoJson);
+    let geoJson = {
+      type: "FeatureCollection",
+      features: []
+    };
+    this.firestore.getRequestedSupplies().subscribe(async res => {
+      // res.forEach(async element => {
+      //   await geoJson.features.push(element.payload.doc.data());
+      //   // console.log(element.payload.doc.data());
+      // });
+      for (const element of res) {
+        await geoJson.features.push(element.payload.doc.data());
+      }
+      this.features = geoJson.features;
+      geoJson.features.forEach(function(marker) {
+        // create a HTML element for each feature
+        console.log("marker created");
+        var el = document.createElement("div");
+        el.className = "marker";
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.geometry.coordinates)
+          .addTo(map);
+      });
+    });
   }
 
   onLoad(map) {

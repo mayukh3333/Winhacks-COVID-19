@@ -26,6 +26,24 @@
             <li>Yukon: 4</li>
             <li>Northwest Territories: 1</li>
           </ul>
+          <div style="overflow-y: scroll; height:300px;">
+            <div
+              *ngFor="let item of features"
+              style="line-height: 10px; border-color: black; border-style: solid;"
+            >
+              <p>
+                <b>{{ item.properties.institution }}</b> <br />
+                Requirements: {{ item.properties.extraInformation }} <br />
+                Email: {{ item.properties.email }} <br />
+                Country: {{ item.properties.country }} <br />
+                City: {{ item.properties.country }} <br />
+                Address: {{ item.properties.address }} <br />
+                Longitude: {{ item.geometry.coordinates[1] }} <br />
+                Latitude: {{ item.geometry.coordinates[0] }}
+              </p>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

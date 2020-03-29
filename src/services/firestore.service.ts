@@ -59,7 +59,7 @@ export class FirestoreService {
       .collection("Requests")
       .snapshotChanges()
       .subscribe(res => {
-        console.log(res[0].payload.doc.data());
+        return res;
       });
   }
 }

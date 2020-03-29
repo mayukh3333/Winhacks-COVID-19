@@ -28,6 +28,7 @@ export class AuthService {
     return this.auth
       .createUserWithEmailAndPassword(user.email, password)
       .then(res => {
+        localStorage.setItem("uid", res.user.uid);
         res.user.getIdToken().then(data => {
           this.firestore.registerNewUser(res.user.uid, user, data);
         });
@@ -42,6 +43,7 @@ export class AuthService {
     return this.auth
       .signInWithEmailAndPassword(user.email, password)
       .then(res => {
+        localStorage.setItem("uid", res.user.uid);
         res.user.getIdToken().then(data => {
           localStorage.setItem("token", data);
           this.router.navigate(["dashboard"]);

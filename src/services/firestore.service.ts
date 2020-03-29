@@ -13,7 +13,9 @@ export class FirestoreService {
   public usersCollection: AngularFirestoreCollection = this.firestore.collection(
     "Users"
   );
-
+  public requestsCollection: AngularFirestoreCollection = this.firestore.collection(
+    "Requests"
+  );
   constructor(private firestore: AngularFirestore, private router: Router) {}
 
   registerNewUser(uid: string, user: User, token: string) {
@@ -28,6 +30,36 @@ export class FirestoreService {
       .then(data => {
         localStorage.setItem("token", token);
         this.router.navigate(["dashboard"]);
+      });
+  }
+
+  requestSupplies(latitude: number, longitude: number, formValues: any) {
+    const data = {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [latitude, longitude]
+      },
+      properties: {
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        email: formValues.email,
+        institution: formValues.institution,
+        city: formValues.city,
+        country: formValues.country,
+        address: formValues.address,
+        extraInformation: formValues.extraInformation,
+        uid: localStorage.getItem("uid")
+      }
+    };
+    this.requestsCollection.add(JSON.parse(JSON.stringify(data)));
+  }
+  async getRequestedSupplies() {
+    return this.firestore
+      .collection("Requests")
+      .snapshotChanges()
+      .subscribe(res => {
+        console.log(res[0].payload.doc.data());
       });
   }
 }

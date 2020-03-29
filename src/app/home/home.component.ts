@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Map } from "mapbox-gl";
 import * as mapboxgl from "mapbox-gl";
+import { FirestoreService } from "src/services/firestore.service";
 
 @Component({
   selector: "app-home",
@@ -10,7 +11,7 @@ import * as mapboxgl from "mapbox-gl";
 export class HomeComponent implements OnInit {
   @ViewChild("map") map: Map;
 
-  constructor() {}
+  constructor(private firestore: FirestoreService) {}
 
   ngOnInit(): void {
     (mapboxgl as any).accessToken =
@@ -29,10 +30,12 @@ export class HomeComponent implements OnInit {
 
     map.on("click", "trees-point", function(e) {
       new mapboxgl.Popup()
-        .setLngLat(e.features[0].geometry.coordinates)
+        // .setLngLat(e.features[0].geometry.coordinates)
         .setHTML("<b>DBH:</b> " + e.features[0].properties.dbh)
         .addTo(map);
     });
+    const geoJson = this.firestore.getRequestedSupplies();
+    console.log("geoJson", geoJson);
   }
 
   onLoad(map) {

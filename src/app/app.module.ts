@@ -12,19 +12,26 @@ import { HomeComponent } from "./home/home.component";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { JwtModule } from "@auth0/angular-jwt";
 import { NgxMapboxGLModule } from "ngx-mapbox-gl";
-
+import { RequestSuppliesComponent } from "./request-supplies/request-supplies.component";
+import { HttpClientModule } from "@angular/common/http";
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    RequestSuppliesComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FormsModule,
+    HttpClientModule,
     JwtModule.forRoot({
       config: {
         // tokenGetter: tokenGetter

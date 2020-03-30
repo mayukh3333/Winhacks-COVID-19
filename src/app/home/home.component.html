@@ -1,0 +1,52 @@
+<div>
+  <div class="accordion-group data-container" data-accordion-group>
+    <div class="accordion" data-accordion>
+      <div class="accordion-control" data-control>
+        <h5>View Statistics in Canada</h5>
+      </div>
+      <div class="accordion-content" data-content>
+        <div class="accordion-content-wrapper">
+          <!-- Add content here -->
+          <p>Total Cases: 5655</p>
+          <p>Total Deaths: 61</p>
+          <p><b>Cases by Province</b></p>
+          <ul>
+            <li>Alberta: 621</li>
+            <li>British Columbia: 884</li>
+            <li>Manitoba: 64</li>
+            <li>New Brunswick: 51</li>
+            <li>Newfoundland and Labrador: 120</li>
+            <li>Nova Scotia: 110</li>
+            <li>Ontario: 1144</li>
+            <li>Prince Edward Island: 11</li>
+            <li>Quebec: 2498</li>
+            <li>
+              Saskatchewan: 134
+            </li>
+            <li>Yukon: 4</li>
+            <li>Northwest Territories: 1</li>
+          </ul>
+          <div style="overflow-y: scroll; height:300px;">
+            <div
+              *ngFor="let item of features"
+              style="line-height: 10px; border-color: black; border-style: solid;"
+            >
+              <p>
+                <b>{{ item.properties.institution }}</b> <br />
+                Requirements: {{ item.properties.extraInformation }} <br />
+                Email: {{ item.properties.email }} <br />
+                Country: {{ item.properties.country }} <br />
+                City: {{ item.properties.country }} <br />
+                Address: {{ item.properties.address }} <br />
+                Longitude: {{ item.geometry.coordinates[1] }} <br />
+                Latitude: {{ item.geometry.coordinates[0] }}
+              </p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="map"></div>
+</div>

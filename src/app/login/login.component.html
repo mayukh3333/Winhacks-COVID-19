@@ -1,0 +1,161 @@
+<div>
+  <div class="viewport">
+    <div
+      class="image image-overlay"
+      style="background-image:url(../assets/gifs/virus.gif)"
+    ></div>
+    <div class="container">
+      <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-5">
+          <div
+            class="accordion-group accordion-group-portal"
+            data-accordion-group
+          >
+            <div class="accordion open" data-accordion>
+              <div class="accordion-control" data-control>
+                <h5>Create Account</h5>
+              </div>
+              <div class="accordion-content" data-content>
+                <div class="accordion-content-wrapper">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput3">Email address</label>
+                    <input
+                      [(ngModel)]="user.email"
+                      type="email"
+                      class="form-control"
+                      id="exampleFormControlInput3"
+                      placeholder="name@example.com"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput4">Password</label>
+                    <input
+                      [(ngModel)]="password"
+                      type="password"
+                      class="form-control"
+                      id="exampleFormControlInput4"
+                      placeholder="At least 6 characters"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput5"
+                      >Repeat Password</label
+                    >
+                    <input
+                      [(ngModel)]="retypedPassword"
+                      type="password"
+                      class="form-control"
+                      id="exampleFormControlInput5"
+                    />
+                    <ul>
+                      <li>
+                        <input
+                          id="r1"
+                          type="radio"
+                          name="radio"
+                          value="receiver"
+                          [(ngModel)]="user.type"
+                        />
+                        <label for="r1">I am in need of supplies</label>
+                      </li>
+                      <li>
+                        <input
+                          [(ngModel)]="user.type"
+                          id="r2"
+                          type="radio"
+                          name="radio"
+                          value="supplier"
+                        />
+                        <label for="r2">I am willing to donate supplies</label>
+                      </li>
+                    </ul>
+                  </div>
+                  <a
+                    class="btn btn-primary btn-block text-white"
+                    (click)="register()"
+                    >Sign Up</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="accordion" data-accordion>
+              <div class="accordion-control" data-control>
+                <h5>Sign In</h5>
+              </div>
+              <div class="accordion-content" data-content>
+                <div class="accordion-content-wrapper">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input
+                      [(ngModel)]="user.email"
+                      type="email"
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      placeholder="name@example.com"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput2">Password</label>
+                    <input
+                      [(ngModel)]="password"
+                      type="password"
+                      class="form-control"
+                      id="exampleFormControlInput2"
+                      placeholder="At least 6 characters"
+                    />
+                  </div>
+                  <a
+                    (click)="signIn()"
+                    class="btn btn-primary btn-block text-white"
+                    >Sign In</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Launch Modal -->
+  <div
+    class="modal fade"
+    id="modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header justify-content-end">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" class="icon-x"></span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <h3>{{ errorTitle }}</h3>
+          <p>
+            {{ errorMessage }}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary btn-block"
+            data-dismiss="modal"
+            style="outline: none;"
+          >
+            Okay!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal End -->
+</div>

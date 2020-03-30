@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "winhacks-2020": {
+      "hosting": {
+        "WinhacksCOVID19": [
+          "winhacks-2020"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "winhacks-2020"
+  }
+}

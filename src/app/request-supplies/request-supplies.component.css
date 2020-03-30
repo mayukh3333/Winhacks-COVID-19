@@ -1,0 +1,21 @@
+.main-content {
+  background: linear-gradient(to top left, #3333ff 0%, #66ff99 100%);
+  box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.25);
+
+  width: 60%;
+  border-radius: 15px;
+}
+row {
+  padding: 0px;
+  margin: 0px;
+}
+container {
+  margin: 0px;
+  padding: 0px;
+}
+.background {
+  background: linear-gradient(to bottom right, #66ffff 0%, #000099 100%);
+}
+label {
+  color: white;
+}

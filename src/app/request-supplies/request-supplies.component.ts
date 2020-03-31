@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { FirestoreService } from "src/services/firestore.service";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-request-supplies",
   templateUrl: "./request-supplies.component.html",
@@ -15,7 +16,11 @@ export class RequestSuppliesComponent implements OnInit {
   country: string;
   extraInformation: string;
   address: string;
-  constructor(private http: HttpClient, private firestore: FirestoreService) {}
+  constructor(
+    private http: HttpClient,
+    private firestore: FirestoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
   async onSubmit(f: NgForm) {
@@ -29,6 +34,7 @@ export class RequestSuppliesComponent implements OnInit {
         const latitude = res.results[0].geometry.location.lat;
         const longitude = res.results[0].geometry.location.lng;
         this.firestore.requestSupplies(latitude, longitude, f.value);
+        this.router.navigate(["dashboard"]);
       });
   }
 }

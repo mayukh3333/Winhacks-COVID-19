@@ -46,8 +46,17 @@ export class AuthService {
         localStorage.setItem("uid", res.user.uid);
         res.user.getIdToken().then(data => {
           localStorage.setItem("token", data);
-          this.router.navigate(["dashboard"]);
+
+          this.firestore.getUser().subscribe(async res => {
+            let payloadData = res.payload.data() as any;
+            if (payloadData.type === "supplier") {
+              this.router.navigate(["dashboard"]);
+            } else {
+              this.router.navigate(["request-supplies"]);
+            }
+          });
         });
+
         return res;
       })
       .catch(error => {

@@ -32,6 +32,10 @@ export class FirestoreService {
         this.router.navigate(["dashboard"]);
       });
   }
+  getUser() {
+    const uid = localStorage.getItem("uid");
+    return this.usersCollection.doc(uid).snapshotChanges();
+  }
 
   requestSupplies(latitude: number, longitude: number, formValues: any) {
     const data = {

@@ -4,6 +4,7 @@ import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { AuthGuardService } from "src/services/auth-guard.service";
 import { RequestSuppliesComponent } from "./request-supplies/request-supplies.component";
+import { DonationPageComponent } from "./donation-page/donation-page.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: "request-supplies",
     component: RequestSuppliesComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "donate-supplies",
+    component: DonationPageComponent,
     canActivate: [AuthGuardService]
   },
   { path: "**", redirectTo: "dashboard", pathMatch: "full" }

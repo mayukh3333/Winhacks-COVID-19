@@ -14,6 +14,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { NgxMapboxGLModule } from "ngx-mapbox-gl";
 import { RequestSuppliesComponent } from "./request-supplies/request-supplies.component";
 import { HttpClientModule } from "@angular/common/http";
+import { DonationPageComponent } from './donation-page/donation-page.component';
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -23,7 +24,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RequestSuppliesComponent
+    RequestSuppliesComponent,
+    DonationPageComponent
   ],
   imports: [
     BrowserModule,

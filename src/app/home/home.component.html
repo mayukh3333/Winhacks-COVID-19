@@ -26,10 +26,12 @@
             <li>Yukon: 4</li>
             <li>Northwest Territories: 1</li>
           </ul>
-          <div style="overflow-y: scroll; height:300px;">
+          <p><b>Requests for supplies</b></p>
+          <div style="overflow-y: scroll; height:180px;">
             <div
+              (click)="navigateToDonation()"
               *ngFor="let item of features"
-              style="line-height: 10px; border-color: black; border-style: solid;"
+              style="line-height: 10px; border-color: black; border-style: solid; cursor: pointer;"
             >
               <p>
                 <b>{{ item.properties.institution }}</b> <br />

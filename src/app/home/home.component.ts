@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Map } from "mapbox-gl";
 import * as mapboxgl from "mapbox-gl";
 import { FirestoreService } from "src/services/firestore.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -11,7 +12,7 @@ import { FirestoreService } from "src/services/firestore.service";
 export class HomeComponent implements OnInit {
   @ViewChild("map") map: Map;
   features: Array<any>;
-  constructor(private firestore: FirestoreService) {}
+  constructor(private firestore: FirestoreService, private router: Router) {}
 
   ngOnInit(): void {
     (mapboxgl as any).accessToken =
@@ -171,5 +172,8 @@ export class HomeComponent implements OnInit {
       "waterway-label"
     );
     console.log("Added layer 2");
+  }
+  navigateToDonation() {
+    this.router.navigate(["donate-supplies"]);
   }
 }
